@@ -1,6 +1,6 @@
 class GameScene {
     constructor(layoutConstraints) {
-        this.sceneContainer = new PIXI.Container()
+        this.sceneContainer = new PIXI.Container();
         this.sceneContainer.height = layoutConstraints.height;
         this.sceneContainer.width = layoutConstraints.width;
         this.gameController = new GameController();
@@ -30,7 +30,7 @@ class GameScene {
 
     drawScore() {
         this.timerText = new PIXI.Text(this.gameController.score, { fontFamily: "Helvetica, sans-serif", fontSize: "6em", fill: 'white' });
-        this.timerText.position.x = this.sceneContainer.width - this.timerText.width - 100;
+        this.timerText.position.x = window.innerWidth - this.timerText.width - 100;
         this.timerText.position.y = 50;
         this.sceneContainer.addChild(this.timerText);
     }
