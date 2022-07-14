@@ -5,14 +5,14 @@ class GameScene {
         this.sceneContainer.width = layoutConstraints.width;
         this.gameController = new GameController();
         this.timerText = new PIXI.Text();
-        this.length = 1000;
-        this.height = 500;
+        this.gameAreaLength = 0.52 * layoutConstraints.width;
+        this.gameAreaHeight = 0.5 * this.gameAreaLength;
         this.midScreen = { x: app.screen.width / 2, y: app.screen.height / 2 };
         this.gameAreaBounds = {
-            topLeft: { x: this.midScreen.x - 0.5 * this.length, y: this.midScreen.y - 0.5 * this.height },
-            topRight: { x: this.midScreen.x + 0.5 * this.length, y: this.midScreen.y - 0.5 * this.height },
-            bottomRight: { x: this.midScreen.x + 0.5 * this.length, y: this.midScreen.y + 0.5 * this.height },
-            bottomLeft: { x: this.midScreen.x - 0.5 * this.length, y: this.midScreen.y + 0.5 * this.height }
+            topLeft: { x: this.midScreen.x - 0.5 * this.gameAreaLength, y: this.midScreen.y - 0.5 * this.gameAreaHeight },
+            topRight: { x: this.midScreen.x + 0.5 * this.gameAreaLength, y: this.midScreen.y - 0.5 * this.gameAreaHeight },
+            bottomRight: { x: this.midScreen.x + 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight },
+            bottomLeft: { x: this.midScreen.x - 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight }
         };
 
         this.gameController.startScoring();
