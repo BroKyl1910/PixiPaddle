@@ -2,6 +2,7 @@ class Paddle {
     constructor(playerMovementBounds, renderer) {
         this.width = 15;
         this.height = 70;
+        this.speed = 3;
         this.pos = {
             x: 0,
             y: 0
@@ -31,8 +32,22 @@ class Paddle {
 
     update(mousePos) {
         // Centre paddle on mouse cursor
-        this.pos.x = mousePos.x - 0.5 * this.width;
-        this.pos.y = mousePos.y - 0.5 * this.height;
+        let targetPos = {
+            x: mousePos.x - 0.5 * this.width,
+            y: mousePos.y - 0.5 * this.height
+        }
+
+        let xDiff = targetPos.x - this.pos.x;
+        let yDiff = targetPos.y - this.pos.y;
+
+        let xSpeed = xDiff * 0.1;
+        let ySpeed = yDiff * 0.1;
+
+        let xMovement = (xDiff < 0) ? xSpeed * - 1 : xSpeed;
+        let yMovement = (yDiff < 0) ? ySpeed * - 1 : ySpeed;
+
+        this.pos.x = (Math.abs(this.pos.x + xMovement) > targetPos.x) ? targetPos.x : this.pos.x + xMovement;
+        this.pos.y = (Math.abs(this.pos.y + yMovement) > targetPos.y) ? targetPos.y : this.pos.y + yMovement;
 
         // Y Bounds
         // Top bound
