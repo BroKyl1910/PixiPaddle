@@ -35,8 +35,8 @@ class GameScene {
 
     update = () => {
         this.gameController.updateScore();
-        this.ball.update();
         this.paddle.update(this.interactionManager.mouse.global)
+        this.ball.update(this.paddle.getCollisionBounds());
         this.timerText.text = this.gameController.score;
     }
 
