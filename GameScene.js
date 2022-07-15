@@ -14,16 +14,19 @@ class GameScene {
             bottomRight: { x: this.midScreen.x + 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight },
             bottomLeft: { x: this.midScreen.x - 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight }
         };
+        this.ball = new Ball(this.gameAreaBounds, app.renderer);
 
         this.gameController.startScoring();
 
         this.drawScore();
         this.drawGameArea();
         this.drawWalls();
+        this.drawBall();
     }
 
     update = () => {
         this.gameController.updateScore();
+        this.ball.update();
         this.timerText.text = this.gameController.score;
     }
 
@@ -82,6 +85,11 @@ class GameScene {
             wallGraphics.endFill();
             this.sceneContainer.addChild(wallGraphics);
         });
+    }
+
+    drawBall(){
+        let ballSprite = this.ball.sprite;
+        this.sceneContainer.addChild(ballSprite);
     }
 
     getSceneContainer(){
