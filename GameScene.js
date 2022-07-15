@@ -14,7 +14,15 @@ class GameScene {
             bottomRight: { x: this.midScreen.x + 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight },
             bottomLeft: { x: this.midScreen.x - 0.5 * this.gameAreaLength, y: this.midScreen.y + 0.5 * this.gameAreaHeight }
         };
+        this.playerMovementBounds = {
+            topLeft: this.gameAreaBounds.topLeft,
+            topRight: { x: this.gameAreaBounds.topLeft.x + ((this.gameAreaBounds.topRight.x - this.gameAreaBounds.topLeft.x) / 4), y: this.gameAreaBounds.topRight.y },
+            bottomRight: { x: this.gameAreaBounds.topLeft.x + ((this.gameAreaBounds.topRight.x - this.gameAreaBounds.topLeft.x) / 4), y: this.gameAreaBounds.bottomRight.y },
+            bottomLeft: this.gameAreaBounds.bottomLeft
+        };
+        this.interactionManager = new PIXI.InteractionManager(app.renderer);
         this.ball = new Ball(this.gameAreaBounds, app.renderer);
+        this.paddle = new Paddle(this.playerMovementBounds, app.renderer);
 
         this.gameController.startScoring();
 
@@ -22,11 +30,13 @@ class GameScene {
         this.drawGameArea();
         this.drawWalls();
         this.drawBall();
+        this.drawPaddle();
     }
 
     update = () => {
         this.gameController.updateScore();
         this.ball.update();
+        this.paddle.update(this.interactionManager.mouse.global)
         this.timerText.text = this.gameController.score;
     }
 
@@ -90,6 +100,11 @@ class GameScene {
     drawBall(){
         let ballSprite = this.ball.sprite;
         this.sceneContainer.addChild(ballSprite);
+    }
+
+    drawPaddle(){
+        let paddle = this.paddle.sprite;
+        this.sceneContainer.addChild(paddle);
     }
 
     getSceneContainer(){
