@@ -3,6 +3,10 @@ class GameController {
         this._startTime = new Date().getTime();
         this.score = 0;
     }
+
+    getScore(){
+        return this.score;
+    }
     
     startScoring = () => {
         this._startTime = new Date().getTime();

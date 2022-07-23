@@ -1,9 +1,10 @@
 class GameScene {
-  constructor(layoutConstraints) {
+  constructor(layoutConstraints, gameController, setScene) {
     this.sceneContainer = new PIXI.Container()
+    this.gameController = gameController
+    this.setScene = setScene
     this.sceneContainer.height = layoutConstraints.height
     this.sceneContainer.width = layoutConstraints.width
-    this.gameController = new GameController()
     this.timerText = new PIXI.Text()
     this.gameAreaLength = 0.52 * layoutConstraints.width
     this.gameAreaHeight = 0.5 * this.gameAreaLength
@@ -43,7 +44,7 @@ class GameScene {
       bottomLeft: this.gameAreaBounds.bottomLeft,
     }
     this.interactionManager = new PIXI.InteractionManager(app.renderer)
-    this.ball = new Ball(this.gameAreaBounds, app.renderer)
+    this.ball = new Ball(this.gameAreaBounds, app.renderer, setScene)
     this.paddle = new Paddle(this.playerMovementBounds, app.renderer)
 
     this.gameController.startScoring()
