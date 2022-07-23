@@ -37,17 +37,21 @@ class Paddle {
             y: mousePos.y - 0.5 * this.height
         }
 
-        let xDiff = targetPos.x - this.pos.x;
-        let yDiff = targetPos.y - this.pos.y;
+        // let xDiff = (targetPos.x - this.pos.x) * 0.75;
+        // let yDiff = (targetPos.y - this.pos.y) * 0.75;
 
-        let xSpeed = xDiff * 0.1;
-        let ySpeed = yDiff * 0.1;
+        // //calculate the distance this would move ...
+        // let distance = Math.sqrt(xDiff*xDiff + yDiff*yDiff);
+        // if(distance > 5){
+        //     xDiff *= 5/distance;
+        //     yDiff *= 5/distance;
+        //   }
 
-        let xMovement = (xDiff < 0) ? xSpeed * - 1 : xSpeed;
-        let yMovement = (yDiff < 0) ? ySpeed * - 1 : ySpeed;
+        // this.pos.x += xDiff;
+        // this.pos.y += yDiff;
 
-        this.pos.x = (Math.abs(this.pos.x + xMovement) > targetPos.x) ? targetPos.x : this.pos.x + xMovement;
-        this.pos.y = (Math.abs(this.pos.y + yMovement) > targetPos.y) ? targetPos.y : this.pos.y + yMovement;
+        this.pos.x = targetPos.x;
+        this.pos.y = targetPos.y;
 
         // Y Bounds
         // Top bound
